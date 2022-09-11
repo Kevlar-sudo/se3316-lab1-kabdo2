@@ -1,0 +1,4 @@
+/*Removing the black dots from the list*/
+ul {
+    list-style-type: none;
+}
