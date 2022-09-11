@@ -1,5 +1,6 @@
 const searchBar = document.getElementById("searchBar");
-let pokemon = new Array(20);
+const searchBarNum = document.getElementById("searchBarNumber");
+//let pokemon = new Array(20);
 
 //for debugging
 console.log(searchBar);
@@ -20,8 +21,22 @@ searchBar.addEventListener('keyup',(e) =>{
             x[i].style.display="list-item";                 
         }
     }
-}
-    
+}    
+);
 
-    
+searchBarNum.addEventListener('keyup',(e) =>{
+    let input = document.getElementById('searchBarNumber').value
+    let x = document.getElementsByClassName('pokemon');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            //won't show if doesn't contain letter
+            x[i].style.display="none";
+        }
+        else {
+            //item will show if contains letter
+            x[i].style.display="list-item";             
+        }
+    }
+}    
 );

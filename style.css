@@ -20,8 +20,24 @@ li {
     }
 
 p{font-size: larger;
+    
+    
     }
 
 .hide {
     display: none;
 }
+
+/*footer for the references section*/
+
+a[href] {
+    
+    float: left;
+    bottom:0px;
+    height:30px;
+    width:100%;
+    
+ }
+ b{
+    padding:10px;
+ }
