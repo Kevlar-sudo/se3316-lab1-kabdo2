@@ -41,3 +41,43 @@ a[href] {
  b{
     padding:10px;
  }
+
+ /*Creating the style for the popup window*/
+ .popup{
+    float: left;
+    border: 1px solid #000;
+    background-color: rgb(64, 76, 80);
+    border-radius: 7px;
+    position: absolute;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding: 0 30px 30px;
+    color: rgb(0, 0, 0);
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+    
+ }
+ .popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background-color: cornsilk;
+    border-radius: 7px;
+    cursor: pointer;
+
+ }
+ .open-popup{
+    visibility: visible;
+ }
+
+ .close-popup{
+    visibility: hidden;
+ }
+
+ /*For the error message*/
+ .errorMsg h2{
+    
+ }
+
