@@ -16,9 +16,13 @@ const searchResults = document.getElementById("searchResults");
 searchResults.innerHTML = list.innerHTML;
 
 //adding an event listener to the search pokedex button
-searchButtonLetters.addEventListener('click',(e) =>{
+
+    
+    searchButtonLetters.addEventListener('click',letterSearch)
+    
+    function letterSearch(){
     //getting the inputted text in the text field next to the search button
-    let input = document.getElementById('searchBar').value
+    let input = searchBar.value;
 
     //making sure the input is lowercase
     input=input.toLowerCase();
@@ -67,13 +71,14 @@ searchButtonLetters.addEventListener('click',(e) =>{
 
 
 }    
-);
 
 //searching by numbers
 //adding an event listener to the search pokedex button
-searchButtonNumbers.addEventListener('click',(e) =>{
+searchButtonNumbers.addEventListener('click',numberSearch)
+
+function numberSearch(){
     //getting the inputted text in the text field next to the search button
-    let input = document.getElementById('searchBarNumber').value
+    let input = searchBarNum.value;
 
     //making sure the leading zeros do not interfere with our result
     input= parseInt(input,10);
@@ -124,7 +129,7 @@ searchButtonNumbers.addEventListener('click',(e) =>{
 
 
 }    
-);
+
 
 popupClose.addEventListener('click',(e)=>{
     //we close the popup when the okay button is clicked
@@ -136,5 +141,20 @@ closeError.addEventListener('click',(e)=>{
     //we close the popup when the okay button is clicked
     
     errorMsg.classList.replace("open-popup","close-popup");
+});
+
+//adding searching by enter key for the letter search bar
+searchBar.addEventListener("keydown", (e)=> {
+    if (e.code === "Enter" && searchBar.value.length != 0) {  //checks whether the pressed key is "Enter"
+        letterSearch();
+        console.log(searchBar.value);
+    }
+});
+//adding searching by enter key for the number search bar
+searchBarNum.addEventListener("keydown", (e)=> {
+    if (e.code === "Enter" && searchBarNum.value.length != 0) {  //checks whether the pressed key is "Enter"
+        numberSearch();
+        
+    }
 });
 
