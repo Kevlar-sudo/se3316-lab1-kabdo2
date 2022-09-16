@@ -7,8 +7,9 @@ const popup = document.getElementById("popup");
 const popupClose = document.getElementById("closeBtn");
 
 //array with descriptions of pokemon (placeholder for now)
-const descriptions = [["buW","ivW","veW","cdrW","chmW","chzW","sqW","wtW","blW","ctW","mpW","bfW","wdW","kkW","bdW","pyW","ptW","pdW","rtW","rcW"],
-["buH","ivH","veH","cdrH","chmH","chzH","sqH","wtH","blH","ctH","mpH","bfH","wdH","kkH","bdH","pyH","ptH","pdH","rtH","rcH"]];
+const descriptions = [["Grass/Poison","Grass/Poison","Grass/Poison","Fire","Fire","Fire/Flying","Water","Water","Water","Bug","Bug","Bug/Flying","Bug/Poison","Bug/Poison","Bug/Poison","Normal/Flying","Normal/Flying","Normal/Flying","Normal","Normal"],
+["118","151","198","116","158","223","94","126","171","55","45","167","63","46","169","85","117","166","103","161"],
+["118","151","198","96","129","176","122","155","210","62","94","151","55","86","150","76","108","157","70","144"]];
 
 
 
@@ -23,7 +24,6 @@ const searchResults = document.getElementById("searchResults");
 
 //copying the results from the original list to the list that will show with the popup window
 searchResults.innerHTML = list.innerHTML;
-
 
 //adding an event listener to the search pokedex button
 
@@ -53,20 +53,25 @@ searchResults.innerHTML = list.innerHTML;
     if(popup.classList.contains("close-popup")){
     popup.classList.replace("close-popup","open-popup");}
       
+    var searches = 0;
+
     //looping through every letter of every pokemon in the search popup
     for (i = 0; i < x.length; i++ ) { 
-        //if the pokemon doesn't have the input text in its name
-        if ( x[i].innerText.toLowerCase().search(input)>-1) {
+        
+        //if the pokemon DOES have the input text in its name
+        if ( x[i].innerText.toLowerCase().search(input)>-1 && searches<5) {
             
             //do show the pokemon
             x[i].style.display="list-item"
-            //TESTING
-            x[i].classList.add("addInfo");
-            searchResults.getElementsByClassName("myclass")[i].textContent = "Weight: "+ descriptions[0][i];
-            searchResults.getElementsByClassName("myNum")[i].textContent = "Height: "+ descriptions[1][i];
+            //Show the pokemon descriptions 
+            //x[i].classList.add("addInfo");
+            searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
+            searchResults.getElementsByClassName("myNum")[i].textContent = "Base ATK: "+ descriptions[1][i];
+            searchResults.getElementsByClassName("myDef")[i].textContent = "Base DEF: "+ descriptions[2][i];
+            searches++;
             
         }
-        //(if the input letter is contained in the pokemon's name)
+        //(if the input letter is NOT contained in the pokemon's name)
         else {
             //don't show the pokemon
             x[i].style.display="none";
@@ -113,14 +118,23 @@ function numberSearch(){
     //if the popup has been previously closed and a new search is conducted we open the popup
     if(popup.classList.contains("close-popup")){
     popup.classList.replace("close-popup","open-popup");}
+
+    var searches = 0;
       
     //looping through every number of every pokemon in the search popup
     for (i = 0; i < x.length; i++ ) { 
         //if the pokemon doesn't have the input text in its name
-        if ( x[i].innerText.toLowerCase().search(input)>-1) {
+        if ( x[i].innerText.toLowerCase().search(input)>-1 && searches<5) {
             
             //do show the pokemon
             x[i].style.display="list-item";
+
+            //adding descriptions
+            searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
+            searchResults.getElementsByClassName("myNum")[i].textContent = "Base ATK: "+ descriptions[1][i];
+            searchResults.getElementsByClassName("myDef")[i].textContent = "Base DEF: "+ descriptions[2][i];
+
+            searches++;
             
             
         }
@@ -152,6 +166,7 @@ popupClose.addEventListener('click',(e)=>{
     for(y = 0; y<20; y++) {
     searchResults.getElementsByClassName("myclass")[y].textContent = "";
     searchResults.getElementsByClassName("myNum")[y].textContent = "";
+    searchResults.getElementsByClassName("myDef")[y].textContent = "";
     }
 });
 
