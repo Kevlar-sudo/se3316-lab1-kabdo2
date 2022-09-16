@@ -6,6 +6,13 @@ const searchButtonNumbers = document.getElementById("searchButtonNumbers");
 const popup = document.getElementById("popup");
 const popupClose = document.getElementById("closeBtn");
 
+//array with descriptions of pokemon (placeholder for now)
+const descriptions = [["buW","ivW","veW","cdrW","chmW","chzW","sqW","wtW","blW","ctW","mpW","bfW","wdW","kkW","bdW","pyW","ptW","pdW","rtW","rcW"],
+["buH","ivH","veH","cdrH","chmH","chzH","sqH","wtH","blH","ctH","mpH","bfH","wdH","kkH","bdH","pyH","ptH","pdH","rtH","rcH"]];
+
+
+
+
 //for the error window
 const errorMsg = document.getElementById("errorMsg");
 const closeError = document.getElementById("closeError");
@@ -13,7 +20,10 @@ const closeError = document.getElementById("closeError");
 //copying the list of pokemon shown on main page to the list that will show on the popup search
 const list = document.getElementById("list");
 const searchResults = document.getElementById("searchResults");
+
+//copying the results from the original list to the list that will show with the popup window
 searchResults.innerHTML = list.innerHTML;
+
 
 //adding an event listener to the search pokedex button
 
@@ -49,7 +59,11 @@ searchResults.innerHTML = list.innerHTML;
         if ( x[i].innerText.toLowerCase().search(input)>-1) {
             
             //do show the pokemon
-            x[i].style.display="list-item";
+            x[i].style.display="list-item"
+            //TESTING
+            x[i].classList.add("addInfo");
+            searchResults.getElementsByClassName("myclass")[i].textContent = "Weight: "+ descriptions[0][i];
+            searchResults.getElementsByClassName("myNum")[i].textContent = "Height: "+ descriptions[1][i];
             
         }
         //(if the input letter is contained in the pokemon's name)
@@ -134,7 +148,11 @@ function numberSearch(){
 popupClose.addEventListener('click',(e)=>{
     //we close the popup when the okay button is clicked
     popup.classList.replace("open-popup","close-popup");
-    
+    //clearing all the descriptions so that they don't interfere in the next search (pokemon won't show up in a search if it's description contains a search key)
+    for(y = 0; y<20; y++) {
+    searchResults.getElementsByClassName("myclass")[y].textContent = "";
+    searchResults.getElementsByClassName("myNum")[y].textContent = "";
+    }
 });
 
 closeError.addEventListener('click',(e)=>{
