@@ -2,14 +2,11 @@
 ul {
     list-style-type: none;
     
-    
 }
 /*Adding style to the list items*/
 li {
     /*making them inline*/
     float: left;
-    display:inline-block;
-
     /*giving the images a border + style */
     border:1px solid #000;
     background-color: rgb(197, 200, 201);
@@ -33,10 +30,7 @@ a[href] {
     width:100%;
     
  }
- b{
-    padding:0px;
- }
-
+ 
  /*Creating the style for the popup window*/
  .popup, .errorMsg{
     float: left;
@@ -125,9 +119,55 @@ a[href] {
    font-size: smaller;
  }
 
- title text{
-   top: 50%;
-    left:50%;
+ .title{
+   text-align: center;
+   align-items: center;
+   width: 100%;
+   font-family: 'Courier New', Courier, monospace;
  }
- 
+
+ #searchButtonLetters, #searchButtonNumbers{
+   padding: 6px 6px 6px 6px;
+   border: 2px solid;
+   border-radius: 5px 5px 5px 5px;
+   border-color: #000;
+   margin-top: 8px;
+   margin-right: 0px;
+   font-size: 15px;
+   
+
+}
+#searchBar, #searchBarNumber{
+   
+  padding: 6px 6px 6px 6px;
+  border: 2px solid;
+  border-radius: 5px 5px 5px 5px;
+  border-color: #000;
+  margin-top: 8px;
+  margin-right: -7px;
+  font-size: 18px;
+  
+}
+
+.firstSearch{
+   
+   text-align: center;
+   align-items: center;
+   
+   width: 100%;
+   
+   
+}
+.secondSearch{
+   text-align: center;
+   align-items: center;
+   
+   width: 100%;
+}
+.references{
+   padding:5px;
+   text-align: center;
+}
+
+
 

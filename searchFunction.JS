@@ -66,8 +66,8 @@ searchResults.innerHTML = list.innerHTML;
             //Show the pokemon descriptions 
             //x[i].classList.add("addInfo");
             searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
-            searchResults.getElementsByClassName("myNum")[i].textContent = "Base ATK: "+ descriptions[1][i];
-            searchResults.getElementsByClassName("myDef")[i].textContent = "Base DEF: "+ descriptions[2][i];
+            searchResults.getElementsByClassName("myNum")[i].textContent = "⚔ Base ATK: "+ descriptions[1][i];
+            searchResults.getElementsByClassName("myDef")[i].textContent = "⛊ Base DEF: "+ descriptions[2][i];
             searches++;
             
         }
@@ -131,8 +131,8 @@ function numberSearch(){
 
             //adding descriptions
             searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
-            searchResults.getElementsByClassName("myNum")[i].textContent = "Base ATK: "+ descriptions[1][i];
-            searchResults.getElementsByClassName("myDef")[i].textContent = "Base DEF: "+ descriptions[2][i];
+            searchResults.getElementsByClassName("myNum")[i].textContent = "⚔ Base ATK: "+ descriptions[1][i];
+            searchResults.getElementsByClassName("myDef")[i].textContent = "⛊ Base DEF: "+ descriptions[2][i];
 
             searches++;
             
