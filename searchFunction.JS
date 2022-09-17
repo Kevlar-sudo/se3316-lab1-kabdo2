@@ -6,7 +6,7 @@ const searchButtonNumbers = document.getElementById("searchButtonNumbers");
 const popup = document.getElementById("popup");
 const popupClose = document.getElementById("closeBtn");
 
-//array with descriptions of pokemon (placeholder for now)
+//array with descriptions of pokemon, the first array has the types, second has the attack points and third has defense points
 const descriptions = [["Grass/Poison","Grass/Poison","Grass/Poison","Fire","Fire","Fire/Flying","Water","Water","Water","Bug","Bug","Bug/Flying","Bug/Poison","Bug/Poison","Bug/Poison","Normal/Flying","Normal/Flying","Normal/Flying","Normal","Normal"],
 ["118","151","198","116","158","223","94","126","171","55","45","167","63","46","169","85","117","166","103","161"],
 ["118","151","198","96","129","176","122","155","210","62","94","151","55","86","150","76","108","157","70","144"]];
@@ -40,7 +40,7 @@ searchResults.innerHTML = list.innerHTML;
     ////testing to see that the input contains only letters a-z both capital or lowercase
     if(/^[a-zA-Z]+$/.test(input)){
 
-    //if true proceed
+    //used for debugging
     console.log(true);
 
     //getting all the pokemon in the search results list
@@ -53,25 +53,27 @@ searchResults.innerHTML = list.innerHTML;
     if(popup.classList.contains("close-popup")){
     popup.classList.replace("close-popup","open-popup");}
       
+    //to track the number of search results that have been shown
     var searches = 0;
 
     //looping through every letter of every pokemon in the search popup
     for (i = 0; i < x.length; i++ ) { 
         
-        //if the pokemon DOES have the input text in its name
+        //if the pokemon DOES have the input text in its name and there has been less than 5 search results shown
         if ( x[i].innerText.toLowerCase().search(input)>-1 && searches<5) {
             
             //do show the pokemon
             x[i].style.display="list-item"
-            //Show the pokemon descriptions 
-            //x[i].classList.add("addInfo");
+
+            //Show the pokemon descriptions by fetching the data from the array we populated earlier
             searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
             searchResults.getElementsByClassName("myNum")[i].textContent = "⚔ Base ATK: "+ descriptions[1][i];
             searchResults.getElementsByClassName("myDef")[i].textContent = "⛊ Base DEF: "+ descriptions[2][i];
+            //increase the number of search results found by 1
             searches++;
             
         }
-        //(if the input letter is NOT contained in the pokemon's name)
+        //(if the input letter is NOT contained in the pokemon's name) or if there has been 5 search results shown (maximum)
         else {
             //don't show the pokemon
             x[i].style.display="none";
@@ -81,8 +83,11 @@ searchResults.innerHTML = list.innerHTML;
     }
     //wrong input detected
     else{
+        //for debugging
         console.log(false);
+        //we open the error message popup
         errorMsg.classList.add("open-popup");
+        //if it has been previously openened and close we use this if statement to change its close class to an open class (thus opening it)
         if(errorMsg.classList.contains("close-popup")){
             errorMsg.classList.replace("close-popup","open-popup");}
         
@@ -106,7 +111,7 @@ function numberSearch(){
     //making sure that the entered number is 1-20
     if(input > 0 && input < 21){
 
-    //if true proceed
+    //for debugging
     console.log(true);
 
     //getting all the pokemon in the search results list
@@ -119,11 +124,12 @@ function numberSearch(){
     if(popup.classList.contains("close-popup")){
     popup.classList.replace("close-popup","open-popup");}
 
+    //to track number of search results
     var searches = 0;
       
     //looping through every number of every pokemon in the search popup
     for (i = 0; i < x.length; i++ ) { 
-        //if the pokemon doesn't have the input text in its name
+        //if the pokemon DOES have the input text in its name and less than 5 search results so far
         if ( x[i].innerText.toLowerCase().search(input)>-1 && searches<5) {
             
             //do show the pokemon
@@ -134,11 +140,12 @@ function numberSearch(){
             searchResults.getElementsByClassName("myNum")[i].textContent = "⚔ Base ATK: "+ descriptions[1][i];
             searchResults.getElementsByClassName("myDef")[i].textContent = "⛊ Base DEF: "+ descriptions[2][i];
 
+            //increase search number
             searches++;
             
             
         }
-        //(if the input letter is contained in the pokemon's name)
+        //if the input letter is NOT contained in the pokemon's name or if 5 search results have been already shown
         else {
             //don't show the pokemon
             x[i].style.display="none";
@@ -146,7 +153,7 @@ function numberSearch(){
         }
     }
     }
-    //wrong input detected
+    //wrong input detected => show the error popup
     else{
         console.log(false);
         errorMsg.classList.add("open-popup");
@@ -158,7 +165,7 @@ function numberSearch(){
 
 }    
 
-
+//adding an event to the close button of the popup
 popupClose.addEventListener('click',(e)=>{
     //we close the popup when the okay button is clicked
     popup.classList.replace("open-popup","close-popup");
@@ -169,7 +176,7 @@ popupClose.addEventListener('click',(e)=>{
     searchResults.getElementsByClassName("myDef")[y].textContent = "";
     }
 });
-
+//close button function
 closeError.addEventListener('click',(e)=>{
     //we close the popup when the okay button is clicked
     
@@ -180,7 +187,7 @@ closeError.addEventListener('click',(e)=>{
 searchBar.addEventListener("keydown", (e)=> {
     if (e.code === "Enter" && searchBar.value.length != 0) {  //checks whether the pressed key is "Enter"
         letterSearch();
-        console.log(searchBar.value);
+        
     }
 });
 //adding searching by enter key for the number search bar
