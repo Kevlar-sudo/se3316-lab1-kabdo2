@@ -38,7 +38,7 @@ searchResults.innerHTML = list.innerHTML;
     input=input.toLowerCase();
 
     ////testing to see that the input contains only letters a-z both capital or lowercase and making sure the input is 20 in size
-    if(/^[a-zA-Z]+$/.test(input) && input.length<=20){
+    if(/^[a-zA-Z]+$/.test(input) && input.length<21){
 
     //used for debugging
     console.log(true);
