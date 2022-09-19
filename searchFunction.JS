@@ -104,10 +104,6 @@ function numberSearch(){
     //getting the inputted text in the text field next to the search button
     let input = searchBarNum.value;
 
-    //making sure the leading zeros do not interfere with our result
-    input= parseInt(input,10);
-
-
     //making sure that the entered number is 1-20
     if(input > 0 && input < 21){
 
