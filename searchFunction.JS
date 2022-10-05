@@ -201,23 +201,36 @@ searchBarNum.addEventListener("keydown", (e)=> {
 });
 
 
-//The function that will be used to
+let tracker = 0;
+
+//The function that will be used to create a dynamic div
 searchBar.addEventListener('keyup', (e) => {
 
     let currentInput = searchBar.value;
     console.log(currentInput);
-
-    if(currentInput.length >0){
-        const newDiv = document.createElement("div");
-        const newContent = document.createTextNode("Hi there and greetings!");
-        newDiv.appendChild(newContent);
-        newDiv.setAttribute('id','createdDiv')
-        document.body.insertBefore(newDiv, list);
     
+
+    
+    if(currentInput.length >0){
+        if(tracker >0){
+            console.log("not creating");
+            console.log(tracker);
+        }
+        else if(tracker == 0)
+        {const newDiv = document.createElement("div");
+        const newContent = document.createTextNode("Testing");
+        newDiv.appendChild(newContent);
+        newDiv.setAttribute('id','createdDiv');
+        newDiv.classList.add("dynamicResults");
+        document.body.insertBefore(newDiv, list);
+        tracker++;
+        console.log(tracker);}
+        
 }
 
 if(currentInput.length == 0){
    document.getElementById('createdDiv').parentNode.removeChild(document.getElementById('createdDiv'));
+    tracker--;
 
 }
 });
