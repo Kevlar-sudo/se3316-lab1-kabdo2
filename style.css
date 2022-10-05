@@ -150,5 +150,15 @@ a[href] {
    text-align: center;
 }
 
+.dynamicResults{
+   width: 100%;
+   margin-top: 50px;
+   padding: 10px 0;
+   background-color: cornsilk;
+   border-radius: 7px;
+   font-weight: bold;
+
+}
+
 
 

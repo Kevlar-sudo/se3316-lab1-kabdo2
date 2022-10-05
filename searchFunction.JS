@@ -5,6 +5,7 @@ const searchButtonLetters = document.getElementById("searchButtonLetters");
 const searchButtonNumbers = document.getElementById("searchButtonNumbers");
 const popup = document.getElementById("popup");
 const popupClose = document.getElementById("closeBtn");
+const dynamicResults = document.getElementById("dynamicResults");
 
 //array with descriptions of pokemon, the first array has the types, second has the attack points and third has defense points
 const descriptions = [["Grass/Poison","Grass/Poison","Grass/Poison","Fire","Fire","Fire/Flying","Water","Water","Water","Bug","Bug","Bug/Flying","Bug/Poison","Bug/Poison","Bug/Poison","Normal/Flying","Normal/Flying","Normal/Flying","Normal","Normal"],
@@ -25,9 +26,14 @@ const searchResults = document.getElementById("searchResults");
 //copying the results from the original list to the list that will show with the popup window
 searchResults.innerHTML = list.innerHTML;
 
+
+//TESTING 
+dynamicResults.classList.add("close-popup");
+
+
+
 //adding an event listener to the search pokedex button
 
-    
     searchButtonLetters.addEventListener('click',letterSearch)
     
     function letterSearch(){
@@ -193,4 +199,27 @@ searchBarNum.addEventListener("keydown", (e)=> {
         
     }
 });
+
+
+//The function that will be used to
+searchBar.addEventListener('keyup', (e) => {
+
+    let currentInput = searchBar.value;
+    console.log(currentInput);
+
+    if(currentInput.length >0){
+        const newDiv = document.createElement("div");
+        const newContent = document.createTextNode("Hi there and greetings!");
+        newDiv.appendChild(newContent);
+        newDiv.setAttribute('id','createdDiv')
+        document.body.insertBefore(newDiv, list);
+    
+}
+
+if(currentInput.length == 0){
+   document.getElementById('createdDiv').parentNode.removeChild(document.getElementById('createdDiv'));
+
+}
+});
+
 
