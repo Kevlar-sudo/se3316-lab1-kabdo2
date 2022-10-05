@@ -202,20 +202,22 @@ searchBarNum.addEventListener("keydown", (e)=> {
 
 
 let tracker = 0;
-
+let searches = 0;
 //The function that will be used to create a dynamic div
 searchBar.addEventListener('keyup', (e) => {
 
     let currentInput = searchBar.value;
     console.log(currentInput);
-    
+    let x = list.getElementsByClassName('pokemon');
+    console.log(x[0].innerText);
 
     
     if(currentInput.length >0){
         if(tracker >0){
             console.log("not creating");
-            console.log(tracker);
+            
         }
+        
         else if(tracker == 0)
         {const newDiv = document.createElement("div");
         const newContent = document.createTextNode("Testing");
@@ -224,9 +226,21 @@ searchBar.addEventListener('keyup', (e) => {
         newDiv.classList.add("dynamicResults");
         document.body.insertBefore(newDiv, list);
         tracker++;
-        console.log(tracker);}
         
-}
+        for (i = 0; i < x.length; i++ ) { 
+           
+        if ( x[i].innerText.toLowerCase().search(currentInput)>-1 && searches<5) {
+            
+            newPokResult = document.createElement("div");
+            newPokText = document.createTextNode(x[i].innerText);
+            newPokResult.appendChild(newPokText);
+            newPokResult.classList.add("pokeStyle");
+            document.body.insertBefore(newPokResult,newDiv);
+        }
+            
+        }}
+    }
+        
 
 if(currentInput.length == 0){
    document.getElementById('createdDiv').parentNode.removeChild(document.getElementById('createdDiv'));
