@@ -209,7 +209,7 @@ searchBar.addEventListener('keyup', (e) => {
     let currentInput = searchBar.value;
     console.log(currentInput);
     let x = list.getElementsByClassName('pokemon');
-    console.log(x[0].innerText);
+    
 
     
     if(currentInput.length >0){
@@ -219,31 +219,47 @@ searchBar.addEventListener('keyup', (e) => {
         }
         
         else if(tracker == 0)
-        {const newDiv = document.createElement("div");
-        const newContent = document.createTextNode("Testing");
-        newDiv.appendChild(newContent);
-        newDiv.setAttribute('id','createdDiv');
-        newDiv.classList.add("dynamicResults");
-        document.body.insertBefore(newDiv, list);
+         {const newDiv = document.createElement("div");
+        // const newContent = document.createTextNode("Testing");
+        // newDiv.appendChild(newContent);
+        // newDiv.setAttribute('id','createdDiv');
+        // newDiv.classList.add("dynamicResults");
+         document.body.insertBefore(newDiv, list);
         tracker++;
         
+        //loop through
         for (i = 0; i < x.length; i++ ) { 
            
         if ( x[i].innerText.toLowerCase().search(currentInput)>-1 && searches<5) {
             
             newPokResult = document.createElement("div");
+            newPokResult.setAttribute('id','pokeDiv');
             newPokText = document.createTextNode(x[i].innerText);
             newPokResult.appendChild(newPokText);
             newPokResult.classList.add("pokeStyle");
             document.body.insertBefore(newPokResult,newDiv);
+            
+
+            var elem = document.createElement("img");
+
+            var images = list.getElementsByTagName("img");
+
+            console.log(images);
+            elem.src = images[i].src;
+
+            
+            newPokResult.appendChild(elem);
         }
             
         }}
     }
         
-
+//for removing when field is empty
 if(currentInput.length == 0){
-   document.getElementById('createdDiv').parentNode.removeChild(document.getElementById('createdDiv'));
+    for (i = 0; i < x.length; i++ ) {
+        if(document.getElementById('pokeDiv')!=null){
+            document.getElementById('pokeDiv').remove();}
+        }
     tracker--;
 
 }
