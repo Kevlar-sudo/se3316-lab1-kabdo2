@@ -245,8 +245,8 @@ function dynamicSearcher(){
         // newDiv.appendChild(newContent);
         // newDiv.setAttribute('id','createdDiv');
         // newDiv.classList.add("dynamicResults");
-         //document.body.insertBefore(newDiv, list);
-        //tracker++;
+        //document.body.insertBefore(newDiv, list);
+        
         
         //loop through
         
@@ -264,7 +264,12 @@ function dynamicSearcher(){
             document.body.insertBefore(newPokResult,list);
             
 
+            
+            
+            //creating the pokemon image
             var elem = document.createElement("img");
+            elem.style.width = '150px';
+            elem.style.height = '150px';
 
             var images = list.getElementsByTagName("img");
 
