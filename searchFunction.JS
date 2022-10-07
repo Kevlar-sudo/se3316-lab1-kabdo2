@@ -89,13 +89,7 @@ dynamicResults.classList.add("close-popup");
     }
     //wrong input detected
     else{
-        //for debugging
-        console.log(false);
-        //we open the error message popup
-        errorMsg.classList.add("open-popup");
-        //if it has been previously openened and close we use this if statement to change its close class to an open class (thus opening it)
-        if(errorMsg.classList.contains("close-popup")){
-            errorMsg.classList.replace("close-popup","open-popup");}
+        showError();
         
     }
 
@@ -157,10 +151,7 @@ function numberSearch(){
     }
     //wrong input detected => show the error popup
     else{
-        console.log(false);
-        errorMsg.classList.add("open-popup");
-        if(errorMsg.classList.contains("close-popup")){
-            errorMsg.classList.replace("close-popup","open-popup");}
+        showError();
         
     }
 
@@ -205,10 +196,31 @@ searchBarNum.addEventListener("keydown", (e)=> {
 let searches = 0;
 //The function that will be used to create a dynamic div
 searchBar.addEventListener('keyup', (e) => {
-        //call the dynamic searcher method
-        dynamicSearcher();
+        
+        if((/^[a-zA-Z]+$/.test(searchBar.value) && searchBar.value.length<21)||(searchBar.value.length ==0) )
+        {
+            dynamicSearcher();//call the dynamic searcher method
         }
-           
+        if(!(/^[a-zA-Z]+$/.test(searchBar.value)||searchBar.value.length ==0) ||searchBar.value.length>20){
+            showError();
+
+        }
+
+        }           
+);
+searchBarNum.addEventListener('keyup', (e) => {
+        
+    if((searchBarNum.value > 0 && searchBarNum.value < 21 ) || (searchBarNum.value.length ==0))
+    {
+        
+        dynamicSearcher();//call the dynamic searcher method
+    }
+    if(!(searchBarNum.value > -1 && searchBarNum.value < 21 )){
+        showError();
+
+    }
+
+    }           
 );
 
 function deleterFunction(){
@@ -223,7 +235,7 @@ function deleterFunction(){
 
 //This is the function that creates and deletes all the various pokemon results dynamically
 function dynamicSearcher(){
-    let currentInput = searchBar.value;
+    let currentInput = searchBar.value || searchBarNum.value;
     
     let x = list.getElementsByClassName('pokemon');
     
@@ -247,8 +259,7 @@ function dynamicSearcher(){
             newPokResult = document.createElement("div");
             newPokResult.setAttribute('id',i+'pokeDiv');
             newPokResult.setAttribute('class','classPoke');
-            newPokText = document.createTextNode(x[i].innerText);
-            newPokResult.appendChild(newPokText);
+            
             newPokResult.classList.add("pokeStyle");
             document.body.insertBefore(newPokResult,list);
             
@@ -262,6 +273,41 @@ function dynamicSearcher(){
 
             
             newPokResult.appendChild(elem);
+
+
+            
+            //for the type text
+            var br = document.createElement("br");
+            newPokResult.appendChild(br);
+
+            var span = document.createElement('span');
+            span.classList.add("myclass");
+
+            newPokText2 = document.createTextNode("Type: "+ descriptions[0][i]);
+            span.appendChild(newPokText2);
+            newPokResult.appendChild(span);
+
+            //for the name text
+            var br = document.createElement("br");
+            newPokResult.appendChild(br);
+
+            newPokText = document.createTextNode(x[i].innerText);
+            newPokResult.appendChild(newPokText);
+            
+            //for the attack field text
+            var br = document.createElement("br");
+            newPokResult.appendChild(br);
+
+            newPokText3 = document.createTextNode("⚔ Base ATK: "+ descriptions[1][i]);
+            newPokResult.appendChild(newPokText3);
+            
+            //for the defense field text
+            var br = document.createElement("br");
+            newPokResult.appendChild(br);
+
+            newPokText4 = document.createTextNode("⛊ Base DEF: "+ descriptions[2][i]);
+            newPokResult.appendChild(newPokText4);
+            
             }
         }
          else if(x[i].innerText.toLowerCase().search(currentInput)==-1 ){
@@ -278,6 +324,14 @@ function dynamicSearcher(){
             deleterFunction();
         }
     
+}
+
+function showError(){
+    //we open the error message popup
+    errorMsg.classList.add("open-popup");
+    //if it has been previously openened and close we use this if statement to change its close class to an open class (thus opening it)
+    if(errorMsg.classList.contains("close-popup")){
+        errorMsg.classList.replace("close-popup","open-popup");}
 }
 
 
