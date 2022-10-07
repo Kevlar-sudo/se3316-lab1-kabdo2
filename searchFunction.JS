@@ -201,68 +201,83 @@ searchBarNum.addEventListener("keydown", (e)=> {
 });
 
 
-let tracker = 0;
+//let tracker = 0;
 let searches = 0;
 //The function that will be used to create a dynamic div
 searchBar.addEventListener('keyup', (e) => {
+        //call the dynamic searcher method
+        dynamicSearcher();
+        }
+           
+);
 
+function deleterFunction(){
+    let x = list.getElementsByClassName('pokemon');
+    for (i = 0; i < x.length; i++ ) { 
+            if(document.getElementById(i+'pokeDiv')!=null){
+                 document.getElementById(i+'pokeDiv').remove();
+                }
+            }
+
+}
+
+//This is the function that creates and deletes all the various pokemon results dynamically
+function dynamicSearcher(){
     let currentInput = searchBar.value;
-    console.log(currentInput);
+    
     let x = list.getElementsByClassName('pokemon');
     
-
-    
-    if(currentInput.length >0){
-        if(tracker >0){
-            console.log("not creating");
-            
-        }
         
-        else if(tracker == 0)
-         {const newDiv = document.createElement("div");
+         //const newDiv = document.createElement("div");
         // const newContent = document.createTextNode("Testing");
         // newDiv.appendChild(newContent);
         // newDiv.setAttribute('id','createdDiv');
         // newDiv.classList.add("dynamicResults");
-         document.body.insertBefore(newDiv, list);
-        tracker++;
+         //document.body.insertBefore(newDiv, list);
+        //tracker++;
         
         //loop through
+        
         for (i = 0; i < x.length; i++ ) { 
+
+
            
-        if ( x[i].innerText.toLowerCase().search(currentInput)>-1 && searches<5) {
-            
+        if ( x[i].innerText.toLowerCase().search(currentInput)>-1) {
+            if(document.getElementById(i+'pokeDiv')==null){
             newPokResult = document.createElement("div");
-            newPokResult.setAttribute('id','pokeDiv');
+            newPokResult.setAttribute('id',i+'pokeDiv');
+            newPokResult.setAttribute('class','classPoke');
             newPokText = document.createTextNode(x[i].innerText);
             newPokResult.appendChild(newPokText);
             newPokResult.classList.add("pokeStyle");
-            document.body.insertBefore(newPokResult,newDiv);
+            document.body.insertBefore(newPokResult,list);
             
 
             var elem = document.createElement("img");
 
             var images = list.getElementsByTagName("img");
 
-            console.log(images);
+            
             elem.src = images[i].src;
 
             
             newPokResult.appendChild(elem);
+            }
+        }
+         else if(x[i].innerText.toLowerCase().search(currentInput)==-1 ){
+            
+            {if(document.getElementById(i+'pokeDiv')!=null){
+                
+                document.getElementById(i+'pokeDiv').remove();
+                }}
         }
             
-        }}
-    }
-        
-//for removing when field is empty
-if(currentInput.length == 0){
-    for (i = 0; i < x.length; i++ ) {
-        if(document.getElementById('pokeDiv')!=null){
-            document.getElementById('pokeDiv').remove();}
         }
-    tracker--;
-
+        //when search empty we delete!!
+        if(currentInput.length == 0){
+            deleterFunction();
+        }
+    
 }
-});
 
 
