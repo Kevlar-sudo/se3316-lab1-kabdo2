@@ -44,13 +44,9 @@ dynamicResults.classList.add("close-search");
     ////testing to see that the input contains only letters a-z both capital or lowercase and making sure the input is 20 in size
     if(/^[a-zA-Z]+$/.test(input) && input.length<21){
 
-    //used for debugging
-    console.log(true);
-
     //getting all the pokemon in the search results list
     let x = list.getElementsByClassName('pokemon');
 
-      
     //to track the number of search results that have been shown
     var searches = 0;
     var alertContent = "";
@@ -119,21 +115,8 @@ function numberSearch(){
         showError();
         
     }
-
-
 }    
 
-//adding an event to the close button of the popup
-popupClose.addEventListener('click',(e)=>{
-    //we close the popup when the okay button is clicked
-    popup.classList.replace("open-popup","close-popup");
-    //clearing all the descriptions so that they don't interfere in the next search (pokemon won't show up in a search if it's description contains a search key)
-    for(y = 0; y<20; y++) {
-    searchResults.getElementsByClassName("myclass")[y].textContent = "";
-    searchResults.getElementsByClassName("myNum")[y].textContent = "";
-    searchResults.getElementsByClassName("myDef")[y].textContent = "";
-    }
-});
 //close button function
 closeError.addEventListener('click',(e)=>{
     //we close the popup when the okay button is clicked
@@ -300,5 +283,6 @@ function showError(){
     if(errorMsg.classList.contains("close-popup")){
         errorMsg.classList.replace("close-popup","open-popup");}
 }
+
 
 
