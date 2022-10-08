@@ -23,12 +23,10 @@ const closeError = document.getElementById("closeError");
 const list = document.getElementById("list");
 const searchResults = document.getElementById("searchResults");
 
-//copying the results from the original list to the list that will show with the popup window
-searchResults.innerHTML = list.innerHTML;
 
 
-//TESTING 
-dynamicResults.classList.add("close-popup");
+//Inititally having the dynamic search box as closed
+dynamicResults.classList.add("close-search");
 
 
 
@@ -50,46 +48,32 @@ dynamicResults.classList.add("close-popup");
     console.log(true);
 
     //getting all the pokemon in the search results list
-    let x = searchResults.getElementsByClassName('pokemon');
+    let x = list.getElementsByClassName('pokemon');
 
-    //initially opening the popup when a search is conducted
-    popup.classList.add("open-popup");
-
-    //if the popup has been previously closed and a new search is conducted we open the popup
-    if(popup.classList.contains("close-popup")){
-    popup.classList.replace("close-popup","open-popup");}
       
     //to track the number of search results that have been shown
     var searches = 0;
+    var alertContent = "";
 
     //looping through every letter of every pokemon in the search popup
     for (i = 0; i < x.length; i++ ) { 
         
         //if the pokemon DOES have the input text in its name and there has been less than 5 search results shown
         if ( x[i].innerText.toLowerCase().search(input)>-1 && searches<5) {
-            
-            //do show the pokemon
-            x[i].style.display="list-item"
 
-            //Show the pokemon descriptions by fetching the data from the array we populated earlier
-            searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
-            searchResults.getElementsByClassName("myNum")[i].textContent = "⚔ Base ATK: "+ descriptions[1][i];
-            searchResults.getElementsByClassName("myDef")[i].textContent = "⛊ Base DEF: "+ descriptions[2][i];
-            //increase the number of search results found by 1
+
+            //this variable will store the info that will show up in the alert box
+            var alertContent = alertContent+x[i].innerText.replace(/(\r\n|\n|\r)/gm, "")+" \nType: "+ descriptions[0][i]+"\n⚔ Base ATK: "+ descriptions[1][i]+"\n⛊ Base DEF: "+ descriptions[2][i]+"\n\n";
             searches++;
-            
-        }
-        //(if the input letter is NOT contained in the pokemon's name) or if there has been 5 search results shown (maximum)
-        else {
-            //don't show the pokemon
-            x[i].style.display="none";
-                           
         }
     }
+    //trim the alert box text to removing trailing whitespaces
+    alertContent = alertContent.trim();
+    alert(alertContent); //show the alert with pokemon info!
     }
     //wrong input detected
     else{
-        showError();
+        showError();//display an error
         
     }
 
@@ -239,16 +223,7 @@ function dynamicSearcher(){
     
     let x = list.getElementsByClassName('pokemon');
     
-        
-         //const newDiv = document.createElement("div");
-        // const newContent = document.createTextNode("Testing");
-        // newDiv.appendChild(newContent);
-        // newDiv.setAttribute('id','createdDiv');
-        // newDiv.classList.add("dynamicResults");
-        //document.body.insertBefore(newDiv, list);
-        
-        
-        //loop through
+
         
         for (i = 0; i < x.length; i++ ) { 
 
@@ -261,10 +236,13 @@ function dynamicSearcher(){
             newPokResult.setAttribute('class','classPoke');
             
             newPokResult.classList.add("pokeStyle");
-            document.body.insertBefore(newPokResult,list);
+            //document.body.insertBefore(newPokResult,list);
+            dynamicResults.appendChild(newPokResult);
             
 
             
+            if(dynamicResults.classList.contains("close-search")){
+                dynamicResults.classList.replace("close-search","open-search");}
             
             //creating the pokemon image
             var elem = document.createElement("img");
@@ -327,6 +305,8 @@ function dynamicSearcher(){
         //when search empty we delete!!
         if(currentInput.length == 0){
             deleterFunction();
+            if(dynamicResults.classList.contains("open-search")){
+                dynamicResults.classList.replace("open-search","close-search");}
         }
     
 }
