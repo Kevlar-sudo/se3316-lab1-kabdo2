@@ -91,47 +91,28 @@ function numberSearch(){
     //making sure that the entered number is 1-20
     if(input > 0 && input < 21){
 
-    //for debugging
-    console.log(true);
-
     //getting all the pokemon in the search results list
-    let x = searchResults.getElementsByClassName('pokemon');
-
-    //initially opening the popup when a search is conducted
-    popup.classList.add("open-popup");
-
-    //if the popup has been previously closed and a new search is conducted we open the popup
-    if(popup.classList.contains("close-popup")){
-    popup.classList.replace("close-popup","open-popup");}
+    let x = list.getElementsByClassName('pokemon');
 
     //to track number of search results
     var searches = 0;
+    var alertContent = "";
       
     //looping through every number of every pokemon in the search popup
     for (i = 0; i < x.length; i++ ) { 
         //if the pokemon DOES have the input text in its name and less than 5 search results so far
         if ( x[i].innerText.toLowerCase().search(input)>-1 && searches<5) {
             
-            //do show the pokemon
-            x[i].style.display="list-item";
-
-            //adding descriptions
-            searchResults.getElementsByClassName("myclass")[i].textContent = "Type: "+ descriptions[0][i];
-            searchResults.getElementsByClassName("myNum")[i].textContent = "⚔ Base ATK: "+ descriptions[1][i];
-            searchResults.getElementsByClassName("myDef")[i].textContent = "⛊ Base DEF: "+ descriptions[2][i];
-
-            //increase search number
+            //this variable will store the info that will show up in the alert box
+            var alertContent = alertContent+x[i].innerText.replace(/(\r\n|\n|\r)/gm, "")+" \nType: "+ descriptions[0][i]+"\n⚔ Base ATK: "+ descriptions[1][i]+"\n⛊ Base DEF: "+ descriptions[2][i]+"\n\n";
             searches++;
             
             
         }
-        //if the input letter is NOT contained in the pokemon's name or if 5 search results have been already shown
-        else {
-            //don't show the pokemon
-            x[i].style.display="none";
-                           
-        }
     }
+    //trim the alert box text to removing trailing whitespaces
+    alertContent = alertContent.trim();
+    alert(alertContent); //show the alert with pokemon info!
     }
     //wrong input detected => show the error popup
     else{
@@ -308,6 +289,7 @@ function dynamicSearcher(){
             if(dynamicResults.classList.contains("open-search")){
                 dynamicResults.classList.replace("open-search","close-search");}
         }
+        
     
 }
 

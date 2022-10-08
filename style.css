@@ -154,11 +154,12 @@ a[href] {
    width: 100%;
    margin-top: 50px;
    padding: 10px 0;
-   background-color: rgb(160, 112, 39);
-   border-radius: 7px;
+   background-color: cornsilk;
+   border:2px solid #000;
    font-weight: bold;
    margin-bottom: 50px;
    font-family:Verdana, Geneva, Tahoma, sans-serif;
+   text-align: center;
 
 }
 .pokeStyle {
@@ -166,7 +167,6 @@ a[href] {
    
    /*giving the images a border + style */
    border:1px solid #000;
-
    display: inline-block;
    background-color: rgb(197, 200, 201);
    padding:10px 40px 10px;
