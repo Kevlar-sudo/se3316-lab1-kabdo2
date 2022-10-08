@@ -13,17 +13,12 @@ const descriptions = [["Grass/Poison","Grass/Poison","Grass/Poison","Fire","Fire
 ["118","151","198","96","129","176","122","155","210","62","94","151","55","86","150","76","108","157","70","144"]];
 
 
-
-
 //for the error window
 const errorMsg = document.getElementById("errorMsg");
 const closeError = document.getElementById("closeError");
 
 //copying the list of pokemon shown on main page to the list that will show on the popup search
 const list = document.getElementById("list");
-const searchResults = document.getElementById("searchResults");
-
-
 
 //Inititally having the dynamic search box as closed
 dynamicResults.classList.add("close-search");
@@ -139,42 +134,53 @@ searchBarNum.addEventListener("keydown", (e)=> {
     }
 });
 
-
-//let tracker = 0;
-let searches = 0;
-//The function that will be used to create a dynamic div
+//The function for dynamic typing in the letter field
 searchBar.addEventListener('keyup', (e) => {
+    //clearing the content of the number field when typing in letter field
+    searchBarNum.value = "";
         
+        //checking to see if the input adheres to only letters (letters a to z) and is max 20 letters in length
         if((/^[a-zA-Z]+$/.test(searchBar.value) && searchBar.value.length<21)||(searchBar.value.length ==0) )
         {
             dynamicSearcher();//call the dynamic searcher method
         }
+        //if input doesnt adhere to input criteria 
         if(!(/^[a-zA-Z]+$/.test(searchBar.value)||searchBar.value.length ==0) ||searchBar.value.length>20){
-            showError();
+            showError(); // show an error message
 
         }
 
         }           
 );
+
+//the function for dynamic typing in the number field
 searchBarNum.addEventListener('keyup', (e) => {
-        
+    //clearing the content of the letter field when typing in the number field
+    searchBar.value = "";
+      
+    //checking that input is a number between 1 and 20
     if((searchBarNum.value > 0 && searchBarNum.value < 21 ) || (searchBarNum.value.length ==0))
     {
         
         dynamicSearcher();//call the dynamic searcher method
     }
+    //if not between input criteria
     if(!(searchBarNum.value > -1 && searchBarNum.value < 21 )){
-        showError();
+        showError(); // display and error
 
     }
 
     }           
 );
-
+//the function that will delete all pokemon in the dynamic results
 function deleterFunction(){
+    //get all the pokemon
     let x = list.getElementsByClassName('pokemon');
+    //loop through them all
     for (i = 0; i < x.length; i++ ) { 
+        //if that pokemon exists
             if(document.getElementById(i+'pokeDiv')!=null){
+                //delete it
                  document.getElementById(i+'pokeDiv').remove();
                 }
             }
@@ -183,53 +189,51 @@ function deleterFunction(){
 
 //This is the function that creates and deletes all the various pokemon results dynamically
 function dynamicSearcher(){
+    //works for letters or numbers depending where user is typing
     let currentInput = searchBar.value || searchBarNum.value;
     
+    //get all pokemon
     let x = list.getElementsByClassName('pokemon');
     
 
-        
-        for (i = 0; i < x.length; i++ ) { 
-
-
-           
+        //loop through them all
+        for (i = 0; i < x.length; i++ ) {  
+            //if match is found
         if ( x[i].innerText.toLowerCase().search(currentInput)>-1) {
+            //if that pokemon doesn't already exist
             if(document.getElementById(i+'pokeDiv')==null){
+                //we create it in the DOM
             newPokResult = document.createElement("div");
             newPokResult.setAttribute('id',i+'pokeDiv');
-            newPokResult.setAttribute('class','classPoke');
             
+            //adding some styling
             newPokResult.classList.add("pokeStyle");
             //document.body.insertBefore(newPokResult,list);
             dynamicResults.appendChild(newPokResult);
             
-
             
+            //the block that houses dynamic results is opened
             if(dynamicResults.classList.contains("close-search")){
                 dynamicResults.classList.replace("close-search","open-search");}
             
             //creating the pokemon image
             var elem = document.createElement("img");
+            //setting image size
             elem.style.width = '150px';
             elem.style.height = '150px';
-
             var images = list.getElementsByTagName("img");
-
-            
+            //getting the images from the full list
             elem.src = images[i].src;
-
-            
+            //adding them to dynamic elements
             newPokResult.appendChild(elem);
 
 
-            
             //for the type text
             var br = document.createElement("br");
             newPokResult.appendChild(br);
-
+            //some styling for the rainbow effect
             var span = document.createElement('span');
             span.classList.add("myclass");
-
             newPokText2 = document.createTextNode("Type: "+ descriptions[0][i]);
             span.appendChild(newPokText2);
             newPokResult.appendChild(span);
@@ -257,8 +261,9 @@ function dynamicSearcher(){
             
             }
         }
+        //if the pokemon in dynamic results no longer match with the input
          else if(x[i].innerText.toLowerCase().search(currentInput)==-1 ){
-            
+            //we dynamically delete said pokemon!
             {if(document.getElementById(i+'pokeDiv')!=null){
                 
                 document.getElementById(i+'pokeDiv').remove();
@@ -269,13 +274,14 @@ function dynamicSearcher(){
         //when search empty we delete!!
         if(currentInput.length == 0){
             deleterFunction();
+            //closing the dynamic block
             if(dynamicResults.classList.contains("open-search")){
                 dynamicResults.classList.replace("open-search","close-search");}
         }
         
     
 }
-
+//used to show the error popup
 function showError(){
     //we open the error message popup
     errorMsg.classList.add("open-popup");
